@@ -1,9 +1,19 @@
+
 <%= form_tag login_path do %>
-  <%= label_tag :email %>
-  <%= email_field_tag :email %>
+<div class="field">
+   <%= label_tag :email,nil, class: "label" %>
+  <div class="control">
+   <%= email_field_tag :email,nil, class: "input "%>
+  </div>
+</div>
 
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
+<div class="field">
+  <%= label_tag :password,nil, class: "label" %>
+  <div class="control">
+     <%= password_field_tag :password,nil, class: "input" %>
+  </div>
+</div>
 
-  <%= submit_tag 'Log In' %>
+<%= submit_tag 'Log In', class: "button is-link" %>
+
 <% end %>
