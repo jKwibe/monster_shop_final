@@ -31,6 +31,8 @@ RSpec.describe 'Merchant Bulk Discount' do
         click_on 'create discount'
 
         expect(page).to  have_content("Discount has been created")
+
+        expect(page).to  have_content("5% discount for 20 items.")
     end
     
 
