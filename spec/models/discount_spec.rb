@@ -8,6 +8,8 @@ RSpec.describe Discount do
     describe "validations" do
         it { should validate_presence_of(:discount) }
         it { should validate_presence_of(:amount) }
+        it { should validate_numericality_of :discount } 
+        it { should validate_numericality_of :amount } 
     end
     describe "methods" do
         before :each do
