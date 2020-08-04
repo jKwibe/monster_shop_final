@@ -9,25 +9,42 @@
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Home', root_path %>
-      <%= link_to 'Register', registration_path unless current_user %>
-      <%= link_to 'Log In', login_path unless current_user %>
-      <% if current_user %>
-        <%= link_to 'Log Out', logout_path %>
-        <%= link_to 'Profile', profile_path %>
-        <p>Logged in as <%= current_user.name %></p>
-        <% if current_merchant_user? %>
-          <%= link_to 'Merchant Dashboard', merchant_dashboard_path %>
-        <% elsif current_admin? %>
-          <%= link_to 'Admin Dashboard', admin_dashboard_path %>
-          <%= link_to 'Users', '/admin/users' %>
-        <% end %>
-      <% end %>
-      <%= link_to 'Merchants', '/merchants' %>
-      <%= link_to 'Items', '/items' %>
-      <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin?%>
-    </nav>
+  <nav class="navbar has-text-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= link_to 'Home', root_path, class: "navbar-item" %>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="main-navbar" class="navbar-menu">
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+       <%= link_to 'Merchants', '/merchants', class: "navbar-item" %>
+      <%= link_to 'Items', '/items', class: "navbar-item" %>
+         <%= link_to "Cart: #{cart.count}", cart_path, class: "navbar-item" unless current_user && current_admin?%>
+        <div class="buttons">
+         <%= link_to 'Register', registration_path, class: "button is-primary" unless current_user %>
+         <%= link_to 'Log In', login_path, class: "button is-link" unless current_user %>
+        <% if current_user %>
+            <%= link_to 'Log Out', logout_path , class: "button is-danger"%>
+            <%= link_to 'Profile', profile_path, class: "navbar-item" %>
+            <p class= "navbar-item" >Logged in as <%= current_user.name%></p>
+           <% if current_merchant_user? %>
+            <%= link_to 'Merchant Dashboard', merchant_dashboard_path, class: "navbar-item" %>
+           <% elsif current_admin? %>
+            <%= link_to 'Admin Dashboard', admin_dashboard_path, class: "navbar-item" %>
+            <%= link_to 'Users', '/admin/users', class: "navbar-item" %>
+           <% end %>
+        <% end %> 
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
     <% flash.each do |type, message| %>
     <p><%= message %></p>
     <% end %>

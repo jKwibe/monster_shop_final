@@ -62,6 +62,7 @@ RSpec.describe Item do
       @order_2.order_items.create!(item: @hippo, price: @hippo.price, quantity: 5)
       @order_3.order_items.create!(item: @nessie, price: @nessie.price, quantity: 7)
       @order_3.order_items.create!(item: @gator, price: @gator.price, quantity: 1)
+
     end
 
     it '.active_items' do
@@ -73,5 +74,10 @@ RSpec.describe Item do
       expect(Item.by_popularity(3, "ASC")).to eq([@giant, @gator, @ogre])
       expect(Item.by_popularity(3, "DESC")).to eq([@hippo, @nessie, @ogre])
     end
+
+    it ".discounted_price(discount)" do
+      expect(@ogre.discounted_price(5)).to  eq(19.0)
+    end
+    
   end
 end

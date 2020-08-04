@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :discounts, dependent: :destroy
   has_many :order_items, through: :items
   has_many :orders, through: :order_items
   has_many :users
@@ -32,4 +33,5 @@ class Merchant < ApplicationRecord
   def order_items_by_order(order_id)
     order_items.where(order_id: order_id)
   end
+  
 end
