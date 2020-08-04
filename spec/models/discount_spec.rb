@@ -20,14 +20,20 @@ RSpec.describe Discount do
             @discount_1 = @megan.discounts.create(discount: 2, amount: 5)
             @discount_2 = @megan.discounts.create(discount: 5, amount: 10)
             @discount_3 = @megan.discounts.create(discount: 10, amount: 20)
-    
-            @bulk = DiscountCalculator.new(@megan.discounts)
+
     
           end
-        it '#discounts_selected' do
-            expect(@megan.discounts.selected_discounts(6)).to eq(1)   
+          it '.best_discounts(quantity)' do
+             bulk_discount = @megan.discounts.best_discounts(11)
+             bulk_discount2 = @megan.discounts.best_discounts(4)
+             bulk_discount3 = @megan.discounts.best_discounts(6)
+             bulk_discount4 = @megan.discounts.best_discounts(30)
             
-        end
+             expect(bulk_discount).to eq(5)
+             expect(bulk_discount2).to eq(nil)
+             expect(bulk_discount3).to eq(2)
+             expect(bulk_discount4).to eq(10)
+           end
         
     end
     
