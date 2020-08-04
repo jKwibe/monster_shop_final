@@ -43,4 +43,11 @@ class Cart
   def limit_reached?(item_id)
     count_of(item_id) == Item.find(item_id).inventory
   end
+
+  def is_discount?(all_discounts, item_id)
+    all_discounts.any? do |dis| 
+      dis.amount <= count_of(item_id)
+    end
+  end
+  
 end
