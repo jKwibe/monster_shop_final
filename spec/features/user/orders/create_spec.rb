@@ -9,6 +9,10 @@ RSpec.describe 'Create Order' do
       @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
+
+      @discount_1 = @megan.discounts.create(discount: 2, amount: 3)
+      @discount_2 = @megan.discounts.create(discount: 5, amount: 5)
+
       @user = User.create!(name: 'Megan', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218, email: 'megan@example.com', password: 'securepassword')
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
@@ -35,6 +39,32 @@ RSpec.describe 'Create Order' do
         expect(page).to have_link(order.id)
       end
     end
+
+    it "I can get a discount on my products" do
+      visit item_path(@ogre)
+      click_button 'Add to Cart'
+
+      visit "/cart"
+
+      within "#item-#{@ogre.id}" do
+        click_button "More of This!"
+      end
+      within "#item-#{@ogre.id}" do
+        click_button "More of This!"
+      end
+      
+      expect(page).to  have_content("Discounted Subtotal: $58.80")
+
+      click_button "Check Out"
+
+      expect(current_path).to  eq("/profile/orders")
+      order = Order.last
+      within "#order-#{order.id}" do
+        expect(page).to  have_content("Total: $58.80")
+      end
+
+    end
+    
   end
 
   describe 'As a Visitor' do
