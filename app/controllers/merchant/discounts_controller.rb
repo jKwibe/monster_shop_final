@@ -13,6 +13,21 @@ class Merchant::DiscountsController  < Merchant::BaseController
         flash[:error] = "Discount was not created sucessfully. Check on your input." 
     end
 
+    def edit 
+       @discount = Discount.find(params[:id])
+    end
+
+    def update
+        discount = Discount.find(params[:id])
+        if discount.update(discount_params)
+            flash[:success] = 'Discount Updated'
+            return redirect_to merchant_dashboard_path
+        end
+
+        flash[:error] = "Check inputs. The value should be bumbers greater than 0and less than 100 on discount."
+        redirect_to edit_merchant_discount_path(discount)
+    end
+    
     private
     def discount_params
         params.permit(:discount, :amount)
