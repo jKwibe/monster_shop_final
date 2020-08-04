@@ -7,7 +7,13 @@ RSpec.describe Cart do
       @brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
       @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 2 )
+      @jini = @megan.items.create!(name: 'Jini', description: "I'm a Jini!", price: 100, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 20 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
+
+      @discount_1 = @megan.discounts.create(discount: 2, amount: 5)
+      @discount_2 = @megan.discounts.create(discount: 5, amount: 10)
+      @discount_3 = @megan.discounts.create(discount: 10, amount: 20)
+      
       @cart = Cart.new({
         @ogre.id.to_s => 1,
         @giant.id.to_s => 2
@@ -63,5 +69,19 @@ RSpec.describe Cart do
 
       expect(@cart.count_of(@giant.id)).to eq(1)
     end
+
+    it ".has_discount()" do
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      
+      
+      expect(@cart.is_discount?(@megan.discounts, @jini.id)).to be_truthy 
+      expect(@cart.is_discount?(@megan.discounts, @giant.id)).to be_falsy 
+    end
+    
   end
 end
