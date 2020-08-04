@@ -363,21 +363,25 @@
           null
         ]
       },
-      "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/discount_calculator.rb": {
+      "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/discount.rb": {
         "lines": [
           1,
           1,
           1,
           null,
-          null,
           1,
-          4,
+          null,
+          2,
           null,
           null,
+          null,
+          null
+        ]
+      },
+      "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/application_record.rb": {
+        "lines": [
           1,
           1,
-          0,
-          null,
           null
         ]
       },
@@ -421,13 +425,6 @@
           null
         ]
       },
-      "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
       "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/item.rb": {
         "lines": [
           1,
@@ -464,15 +461,32 @@
           null
         ]
       },
-      "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/discount.rb": {
+      "/Users/kwibemerci/turing_school/module_2/projects/monster_shop_final/app/models/discount_calculator.rb": {
         "lines": [
           1,
           1,
           1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1596508001
+    "timestamp": 1596508503
   }
 }
