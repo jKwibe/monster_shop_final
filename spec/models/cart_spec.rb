@@ -82,6 +82,18 @@ RSpec.describe Cart do
       expect(@cart.is_discount?(@megan.discounts, @jini.id)).to be_truthy 
       expect(@cart.is_discount?(@megan.discounts, @giant.id)).to be_falsy 
     end
+
+    it ".discounted_subtotal(item_id, discount)" do
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      @cart.add_item(@jini.id.to_s)
+      
+      
+      expect(@cart.discounted_subtotal(@jini.id, 2)).to eq(588) 
+    end
     
   end
 end

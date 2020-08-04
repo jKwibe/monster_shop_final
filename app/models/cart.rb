@@ -49,5 +49,10 @@ class Cart
       dis.amount <= count_of(item_id)
     end
   end
+
+  def discounted_subtotal(item_id, discount)
+    @contents[item_id.to_s] * Item.find(item_id).discounted_price(discount)
+  end
+  
   
 end
