@@ -29,4 +29,10 @@ class Item < ApplicationRecord
   def average_rating
     reviews.average(:rating)
   end
+
+  def discounted_price(discount)
+    self.price - (self.price * (discount.to_f / 100))
+  end
+  
+
 end
