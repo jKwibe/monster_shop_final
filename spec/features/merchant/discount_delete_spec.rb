@@ -9,7 +9,14 @@ RSpec.describe 'Merchant Discount Delete' do
         @discount = @merchant_1.discounts.create(discount: 5, amount: 10)
         @discount2 = @merchant_1.discounts.create(discount: 2, amount: 5)
         @discount3 = @merchant_1.discounts.create(discount: 10, amount: 20)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
+
+        visit "/login"
+        fill_in :email,	with: 'megan@example.com' 
+        fill_in :password,	with: 'securepassword'
+
+        within 'form' do
+          click_on "Log In"
+        end
         end
 
     it "can delete discount" do
@@ -32,7 +39,8 @@ RSpec.describe 'Merchant Discount Delete' do
 
           expect(current_path).to  eq(merchant_dashboard_path)
 
-          expect(page).to have_content("Discount deleted")  
+          expect(page).to have_content("Discount deleted")
+          expect(page).to_not have_content("5% discount for 10 items.")   
       end
       
     end
