@@ -34,6 +34,6 @@ RSpec.describe 'Merchant Bulk Discount' do
 
         expect(page).to  have_content("5% discount for 20 items.")
     end
-    
 
+    
 end

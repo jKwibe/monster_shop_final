@@ -5,7 +5,12 @@
 <h2> Items discounts </h2>
 
 <% @merchant.discounts.each do |bulk_discount|  %>
+<div id="discount-<%= bulk_discount.id%>">
   <p><%= bulk_discount.discount %>% discount for <%= bulk_discount.amount %> items.</p>
+  <%= button_to "update", edit_merchant_discount_path(bulk_discount), method: :get %>
+  <%= button_to "delete", merchant_discount_path(bulk_discount), method: :delete %>
+  </div>
+ <hr>
 <% end %>
 
 <%= link_to 'My Items', '/merchant/items' %>

@@ -1,0 +1,5 @@
+<%= form_tag merchant_discount_path(@discount) , method: :patch do %>
+    <%= number_field_tag :discount, @discount.discount, placeholder: "Discount"%>
+    <%= number_field_tag :amount, @discount.amount, placeholder: "Item amount"%>
+    <%= submit_tag 'update discount' %>
+<% end %>
