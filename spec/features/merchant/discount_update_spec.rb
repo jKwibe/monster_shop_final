@@ -9,7 +9,14 @@ RSpec.describe 'Merchant Discount' do
         @discount = @merchant_1.discounts.create(discount: 5, amount: 10)
         @discount2 = @merchant_1.discounts.create(discount: 2, amount: 5)
         @discount3 = @merchant_1.discounts.create(discount: 10, amount: 20)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
+        visit "/login"
+        fill_in :email,	with: 'megan@example.com' 
+        fill_in :password,	with: 'securepassword'
+
+        within 'form' do
+          click_on "Log In"
+        end
+
         end
 
     it "can update discount" do
@@ -37,7 +44,7 @@ RSpec.describe 'Merchant Discount' do
         expect(current_path).to  eq(merchant_dashboard_path)
   
         within "#discount-#{@discount.id}" do
-        #   expect(page).to  have_content("3% discount for 8 items.")
+          expect(page).to  have_content("3% discount for 8 items.")
           expect(page).to  have_button("update")
         end
   
